@@ -21,7 +21,8 @@ namespace Parking_Code.Models
             Permanence_Days = permaneceDays;
             Permanence_hours = permanenceHours;
 
-            if (permanenceHours >= 24)
+           
+            if (permaneceDays == 1)
                 Final_Price = price.Day_price;
 
             if (permanenceHours < 1)

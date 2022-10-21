@@ -30,6 +30,7 @@ namespace Parking_Code.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> Get(string id)
         {
             var model = await DepartureTicketDataAccess.GetTicketAsync(id);
@@ -66,6 +67,7 @@ namespace Parking_Code.Controllers
 
             var model = new DepartureTicket(enterTicket, Price);
 
+            model.Id = id;
             await DepartureTicketDataAccess.UpdateTicketAsync(id, model);
             return Ok(model);
         }
@@ -79,7 +81,7 @@ namespace Parking_Code.Controllers
                 return NotFound("Departure ticket dont exist");
 
             await DepartureTicketDataAccess.DeleteTicketAsync(id);
-            return Ok(model);
+            return NoContent();
         }
     }
 }

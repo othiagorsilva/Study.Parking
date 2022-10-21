@@ -25,6 +25,7 @@ namespace Parking_Code.Controllers
         }
 
         [HttpGet]
+        [Route("{id}")]
         public async Task<IActionResult> Get(string id)
         {
             var model = await vehicleDataAccess.GetVehicleAsync(id);
@@ -46,7 +47,6 @@ namespace Parking_Code.Controllers
                                       vehicleInputModel.LicensePlate);
 
             await vehicleDataAccess.CreateVehicleAsync(vehicle);
-
             return Ok(vehicleInputModel);
         }
 
@@ -63,7 +63,7 @@ namespace Parking_Code.Controllers
                                       vehicleInput.Model,
                                       vehicleInput.Color,
                                       vehicleInput.LicensePlate);
-
+            model.Id = id;
             await vehicleDataAccess.UpdateVehicleAsync(id, model);
             return Ok(model);
         }
@@ -77,7 +77,7 @@ namespace Parking_Code.Controllers
                 return NotFound("vehicle not find");
 
             await vehicleDataAccess.DeleteVehicleAsync(id);
-            return Ok(model);
+            return NoContent();
         }
     }
 }

@@ -56,6 +56,8 @@ namespace Parking_Code.Controllers
 
             var model = new Price(PriceInputModel.Type, PriceInputModel.Inicial_Price, PriceInputModel.Adicional_price, PriceInputModel.Day_price);
 
+            model.Id = id;
+
             await PriceDataAccess.UpdatePriceAsync(id, model);
             return Ok(model);
         }
@@ -69,7 +71,7 @@ namespace Parking_Code.Controllers
                 return NotFound("Price dont exist");
 
             await PriceDataAccess.DeletePriceAsync(id);
-            return Ok(model);
+            return NoContent();
         }
     }
 }
