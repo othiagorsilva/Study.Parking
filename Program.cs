@@ -1,4 +1,6 @@
 using Study.Parking;
+using Study.Parking.DataAccess;
+using Study.Parking.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,7 +10,12 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.Configure<DataBaseSettings>(builder.Configuration.GetSection("MongoDB"));
+
+builder.Services.AddScoped<IDataAccessMongo<Ticket>, TicketDataMongo>();
+builder.Services.AddScoped<IDataAccessMongo<Vehicle>, VehicleDataMongo>();
+builder.Services.AddScoped<IDataAccessMongo<PriceTable>, PriceTableDataMongo>();
 
 var app = builder.Build();
 

@@ -4,7 +4,7 @@ using Study.Parking.Models;
 
 namespace Study.Parking.DataAccess
 {
-    public class TicketDataMongo : ITicketDataMongo
+    public class TicketDataMongo : IDataAccessMongo<Ticket>
     {
         private readonly IMongoCollection<Ticket> _collection;
         private readonly IMongoCollection<PriceTable> _collectionPriceTables;
@@ -34,6 +34,7 @@ namespace Study.Parking.DataAccess
             return model;
         }
 
+/*
         public async Task<Ticket> Patch(string Id, Ticket model)
         {
             var ticket = await _collection.Find(x=>x.Id == Id).FirstOrDefaultAsync();
@@ -42,9 +43,11 @@ namespace Study.Parking.DataAccess
             return null;
 
             var update = Builders<Ticket>.Update.Set(x=>x.TimeOut, model.TimeOut);
+            update.
             await _collection.UpdateOneAsync(x=>x.Id == Id, update);
 
             return model;
         }
+*/
     }
 }
